@@ -1,0 +1,683 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@theme {
+ --font-display: 'Poppins', sans-serif;
+ --breakpoint-3xl: 1920px;
+ --color-primary: white;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-display);
+  }
+}
+
+.nav-link {
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  border: none;
+
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border-radius: 100px;
+  font-weight: 300;
+  place-content: center;
+  
+  padding: 0.6rem 1rem;
+  font-size: 0.825rem;
+  line-height: 1rem;
+
+  background-color: rgba(0, 0, 0, 0.843);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.04),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  color: #fff;
+}
+
+.nav-link:hover {
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 0 1px rgba(252, 232, 3, 0.08);
+  color: rgba(247, 203, 23);
+  transform: translate(0, -0.25rem);
+  background-color: rgba(0, 0, 0, 0.96);
+}
+
+.player-section {
+  position: relative;
+  height: 90vh;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  transition: 0.5s ease;
+}
+
+/* Parallax base styles */
+.parrallax {
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: 0.45s cubic-bezier(0.2, 0.49, 0.32, 0.99);
+}
+
+/* Background image */
+.bg-img {
+  position: absolute;
+  opacity: 0.7;
+  width: 104.16%;
+  top: 50.86%;
+  left: 50.69%;
+  z-index: 1;
+}
+
+/* Fog layers */
+.fog_7 {
+  position: absolute;
+  z-index: 2;
+  width: 104.16%;
+  top: 37.66%;
+  left: 30.83%;
+}
+
+.fog_6 {
+  position: absolute;
+  z-index: 3;
+  width: 138.89%;
+  top: 37.66%;
+  left: 51.39%;
+}
+
+.fog_5 {
+  position: absolute;
+  z-index: 4;
+  width: 62.5%;
+  top: 48.77%;
+  left: 50.07%;
+}
+
+.fog_4 {
+  position: absolute;
+  z-index: 4;
+  width: 138.89%;
+  top: 37.66%;
+  left: 50.07%;
+}
+
+.fog_3 {
+  position: absolute;
+  z-index: 6;
+  width: 104.16%;
+  top: 58.77%;
+  left: 21.39%;
+}
+
+.fog_2 {
+  position: absolute;
+  z-index: 7;
+  width: 104.16%;
+  top: 37.66%;
+  left: 53.89%;
+}
+
+/* Sun rays */
+.sun_rays {
+  position: absolute;
+  z-index: 20;
+  width: 69.44%;
+  top: -0.34%;
+  left: 31.39%;
+  pointer-events: none;
+}
+
+/* Players - Responsive positioning */
+.ronaldinho {
+  position: absolute;
+  z-index: 6;
+  width: 38.19%;
+  top: 43.66%;
+  left: 11.39%;
+}
+
+.pele {
+  position: absolute;
+  z-index: 4;
+  width: 41.67%;
+  top: 81.11%;
+  left: 32.39%;
+}
+
+.messi {
+  position: absolute;
+  z-index: 6;
+  width: 45.14%;
+  top: 61.11%;
+  left: 47.39%;
+}
+
+.maradona {
+  position: absolute;
+  z-index: 8;
+  width: 27.78%;
+  top: 81.11%;
+  left: 76.39%;
+}
+
+.ronaldo {
+  position: absolute;
+  z-index: 7;
+  width: 47.22%;
+  top: 41.66%;
+  left: 90.39%;
+}
+
+.text {
+  position: absolute;
+  color: rgba(28, 28, 28, 0.9);
+  z-index: 5;
+  top: 37.66%;
+  left: 50%;
+  text-align: center;
+  text-transform: uppercase;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+  width: auto; 
+  white-space: nowrap; 
+}
+
+.text h1 {
+  font-weight: 700;
+  font-size: 100px;
+  margin: 0;
+  line-height: 1;
+}
+
+/* Shadow */
+.black_shadow {
+  position: absolute;
+  z-index: 20;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* Fog 1 */
+.fog_1 {
+  position: absolute;
+  z-index: 21;
+  width: 111.11%;
+  top: 43.83%;
+  left: 50%;
+}
+
+/* Vignette */
+.vignette {
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: radial-gradient(
+    ellipse at center, 
+    rgba(0,0,0,0) 83%,
+    rgba(0,0,0,0.7));
+  pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1280px) {
+  .text h1 {
+    font-size: 80px;
+  }
+  
+  .ronaldinho {
+    width: 34%;
+    left: 8%;
+  }
+  
+  .pele {
+    width: 38%;
+    left: 28%;
+  }
+  
+  .messi {
+    width: 40%;
+    left: 47%;
+  }
+  
+  .maradona {
+    width: 25%;
+    left: 74%;
+  }
+  
+  .ronaldo {
+    width: 42%;
+    left: 88%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .player-section {
+    height: 85vh;
+  }
+  
+  .text h1 {
+    font-size: 65px;
+  }
+  
+  .ronaldinho {
+    width: 35%;
+    left: 6%;
+    top: 45%;
+    z-index: 4;
+  }
+  
+  .pele {
+    width: 36%;
+    left: 26%;
+    top: 82%;
+    z-index: 7;
+  }
+  
+  .messi {
+    width: 38%;
+    left: 47%;
+    top: 62%;
+  }
+  
+  .maradona {
+    width: 28%;
+    left: 72%;
+    top: 82%;
+  }
+  
+  .ronaldo {
+    width: 43%;
+    left: 86%;
+    top: 42%;
+  }
+  
+  /* Adjust fog sizes */
+  .fog_7, .fog_6, .fog_4, .fog_3, .fog_2 {
+    width: 120%;
+  }
+  
+  .fog_5 {
+    width: 70%;
+  }
+  
+  .fog_1 {
+    width: 125%;
+  }
+}
+
+@media (max-width: 768px) {
+  .player-section {
+    height: 80vh;
+  }
+  
+  .text h1 {
+    font-size: 45px;
+    top: 40%;
+  }
+  
+  .ronaldinho {
+    width: 34%;
+    left: 4%;
+    top: 40%;
+  }
+  
+  .pele {
+    width: 32%;
+    left: 22%;
+    top: 83%;
+  }
+  
+  .messi {
+    width: 38%;
+    left: 47%;
+    top: 63%;
+  }
+  
+  .maradona {
+    width: 30%;
+    left: 70%;
+    top: 83%;
+  }
+  
+  .ronaldo {
+    width: 40%;
+    left: 84%;
+    top: 43%;
+  }
+  
+  /* Adjust positioning for mobile */
+  .bg-img {
+    width: 110%;
+  }
+  
+  .fog_7 {
+    left: 25%;
+  }
+  
+  .fog_6 {
+    left: 48%;
+  }
+  
+  .fog_5 {
+    left: 48%;
+  }
+  
+  .fog_4 {
+    left: 48%;
+  }
+  
+  .fog_3 {
+    left: 18%;
+  }
+  
+  .fog_2 {
+    left: 50%;
+  }
+  
+  .sun_rays {
+    width: 80%;
+    left: 28%;
+  }
+  
+  .fog_1 {
+    width: 130%;
+  }
+}
+
+@media (max-width: 640px) {
+  .player-section {
+    height: 75vh;
+  }
+  
+  .text h1 {
+    font-size: 35px;
+    top: 42%;
+  }
+  
+  .ronaldinho {
+    width: 35%;
+    left: 2%;
+    top: 47%;
+  }
+  
+  .pele {
+    width: 40%;
+    left: 18%;
+    top: 84%;
+  }
+  
+  .messi {
+    width: 36%;
+    left: 47%;
+    top: 64%;
+  }
+  
+  .maradona {
+    width: 30%;
+    left: 68%;
+    top: 84%;
+  }
+  
+  .ronaldo {
+    width: 40%;
+    left: 82%;
+    top: 44%;
+  }
+  
+  /* Further adjust fog positioning */
+  .fog_7 {
+    left: 20%;
+  }
+  
+  .fog_6 {
+    left: 45%;
+  }
+  
+  .fog_3 {
+    left: 15%;
+  }
+  
+  .sun_rays {
+    width: 90%;
+    left: 25%;
+  }
+}
+
+@media (max-width: 480px) {
+  .player-section {
+    height: 70vh;
+  }
+  
+  .text h1 {
+    font-size: 28px;
+    top: 44%;
+  }
+  
+  .ronaldinho {
+    width: 40%;
+    left: 0%;
+    top: 48%;
+    z-index: 5;
+  }
+  
+  .pele {
+    width: 40%;
+    left: 15%;
+    top: 85%;
+  }
+  
+  .messi {
+    width: 39%;
+    left: 47%;
+    top: 65%;
+  }
+  
+  .maradona {
+    width: 30%;
+    left: 66%;
+    top: 85%;
+  }
+  
+  .ronaldo {
+    width: 40%;
+    left: 80%;
+    top: 45%;
+  }
+  
+  /* Stack elements more vertically on very small screens */
+  .fog_7, .fog_6, .fog_4, .fog_3, .fog_2 {
+    width: 140%;
+  }
+  
+  .fog_5 {
+    width: 80%;
+  }
+  
+  .bg-img {
+    width: 120%;
+  }
+  
+  .sun_rays {
+    width: 100%;
+    left: 20%;
+  }
+  
+  .fog_1 {
+    width: 140%;
+  }
+}
+
+@media (max-width: 360px) {
+  .player-section {
+    height: 1000vh;
+  }
+  
+  .text h1 {
+    font-size: 22px;
+    top: 46%;
+  }
+  
+  .ronaldinho {
+    width: 40%;
+  }
+  
+  .pele {
+    width: 40%;
+    left: 12%;
+  }
+  
+  .messi {
+    position: absolute;
+    width: 40%;
+  }
+  
+  .maradona {
+    width: 30%;
+    left: 64%;
+  }
+  
+  .ronaldo {
+    width: 40%;
+    left: 78%;
+  }
+}
+
+/* Portrait orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+  .player-section {
+    height: 100vh;
+  }
+  
+  .text h1 {
+    font-size: 40px;
+    top: 35%;
+  }
+  
+  /* Adjust player positions for landscape */
+  .ronaldinho {
+    top: 40%;
+  }
+  
+  .pele {
+    top: 75%;
+  }
+  
+  .messi {
+    top: 90%;
+  }
+  
+  .maradona {
+    top: 75%;
+  }
+  
+  .ronaldo {
+    top: 38%;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Container for better parallax performance */
+.parrallax-container {
+  transform-style: preserve-3d;
+  perspective: 1px;
+}
+
+.btn {
+  position: relative;
+  width: 250px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  display: inline-block;
+  transform-style: preserve-3d;
+  perspective: 500px; /* THIS creates the 3D camera */
+  transition: all .3s ease-out;
+  z-index: 200;
+}
+
+.btntext {
+  visibility: hidden;
+}
+
+/* Faces */
+.flip-front,
+.flip-back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transition: transform .3s ease-out;
+}
+
+/* FRONT */
+.flip-front {
+  color: gold;
+  border: 1px solid red;
+  background-color: black;
+  transform: rotateX(0deg) translateZ(25px);
+}
+
+/* BACK */
+.flip-back {
+  color: black;
+  background-color: gold;
+  border: 1px solid white;
+  transform: rotateX(90deg) translateZ(25px);
+}
+
+/* HOVER ANIMATION */
+.btn:hover .flip-front {
+  transform: rotateX(-90deg) translateZ(25px);
+}
+
+.btn:hover .flip-back {
+  transform: rotateX(0deg) translateZ(25px);
+}
+
+
+.exclusive-p {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 20px;
+  color: rgba(247, 203, 23);
+}
+
+.exclusive-h1{
+  color: rgb(134, 13, 9);
+}
+
+.title {
+  text-align: center;
+  color: black;
+  padding-bottom: 12px;
+  position: relative; /* IMPORTANT for ::after positioning */
+}
+
+.title::after {
+  content: '';
+  background: rgba(194, 0, 0, 0.8);
+  width: clamp(60px, 25%, 120px); /* responsive width */
+  height: 4px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
