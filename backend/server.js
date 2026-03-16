@@ -20,20 +20,30 @@ process.on("uncaughtException", (err) => {
 
 const app = express();
 
-// ✅ CORS first, before everything
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://gof-ecommerce-website.vercel.app",
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://gof-ecommerce-website.vercel.app/",
-    ],
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.log("Blocked by CORS:", origin);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   }),
 );
 
-// ✅ Body parser after CORS
 app.use(express.json());
 
 // Routes
