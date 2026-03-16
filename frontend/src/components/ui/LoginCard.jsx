@@ -61,7 +61,7 @@ function LoginCard({ isOpen, setIsOpen }) {
   return (
     <div
       ref={cardRef}
-      className="absolute right-6 top-20 bg-white text-black w-72 p-6 rounded-xl shadow-xl hidden md:block z-50 border-2 border-neutral-100"
+      className="absolute right-6 top-20 bg-white text-black w-72 p-6 rounded-xs shadow-xl hidden md:block z-50 border-2 border-gray-50"
     >
 
       {/* LOGGED IN VIEW */}

@@ -2,8 +2,9 @@ import { useState, useContext } from "react"
 import GOF_Logo from "../../assets/images/GOFlogo.png"
 import LoginCard from "../ui/LoginCard"
 import { Link } from "react-router-dom"
-import { FiMenu, FiX, FiShoppingCart, FiUser, FiSearch } from "react-icons/fi"
+import { FiMenu, FiX, FiShoppingCart, FiUser, FiSearch, FiHeart } from "react-icons/fi"
 import { CartContext } from "../../context/CartContext"
+import CartCard from "../ui/CartCard"
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -11,6 +12,8 @@ function Navbar() {
 
   const { cartCount } = useContext(CartContext)
   // const cartCount = 3
+
+  const [showMiniCart, setShowMiniCart] = useState(false)
 
   const handleLoginClick = () => {
     if (window.innerWidth >= 768) {
@@ -53,19 +56,39 @@ function Navbar() {
           />
         </div>
 
-        {/* Cart */}
-        <Link
-           to="/cart"
+         {/* Wishlist */}
+         <Link
+           to="/wishlist"
            className="flex items-center relative hover:text-amber-300"
          >
-           <FiShoppingCart className="text-lg sm:text-xl" />
-
-           {cartCount > 0 && (
-             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
-               {cartCount}
-             </span>
-           )}
+           <FiHeart className="text-lg sm:text-xl" />
          </Link>
+
+        {/* Cart */}
+        <div
+          className="relative"
+          onMouseEnter={() => setShowMiniCart(true)}
+          onMouseLeave={() => setShowMiniCart(false)}
+        >
+
+          <Link
+            to="/cart"
+            className="flex items-center relative hover:text-amber-300"
+          >
+
+            <FiShoppingCart className="text-lg sm:text-xl" />
+
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+                {cartCount}
+              </span>
+            )}
+
+          </Link>
+
+          {showMiniCart && <CartCard />}
+
+        </div>
 
         {/* Desktop Login */}
         <button

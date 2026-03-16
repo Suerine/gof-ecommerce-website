@@ -27,7 +27,7 @@ export const createProduct = async (req, res) => {
 export const getProducts = async (req, res) => {
   try {
     const page = Number(req.query.page) || 1;
-    const limit = Number(req.query.limit) || 8;
+    const limit = Number(req.query.limit) || 20;
     const keyword = req.query.keyword
       ? {
           name: {

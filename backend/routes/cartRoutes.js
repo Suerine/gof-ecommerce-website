@@ -4,6 +4,7 @@ import {
   getCart,
   removeFromCart,
   clearCart,
+  updateCartItem,
 } from "../controllers/cartController.js";
 
 import { protect } from "../middleware/authMiddleware.js";
@@ -19,6 +20,11 @@ router.get("/", protect, getCart);
 ADD ITEM TO CART
 */
 router.post("/", protect, addToCart);
+
+/*
+UPDATE CART ITEM QUANTITY
+*/
+router.put("/", protect, updateCartItem);
 
 /*
 REMOVE ITEM FROM CART

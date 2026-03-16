@@ -55,7 +55,7 @@ const TopPicks = () => {
            <img
              src={MESSI_Jersey}
              alt="Messi PSG"
-             className="w-full max-w-[350px] drop-shadow-xl/50"
+             className="w-full max-w-[600px] drop-shadow-xl/50"
            />
          </a>
        </div>
@@ -64,7 +64,7 @@ const TopPicks = () => {
          <img
            src={RONALDINHO_Boots}
            alt="Ronaldinho Boots"
-           className="w-full max-w-[350px] drop-shadow-xl/50"
+           className="w-full max-w-[600px] drop-shadow-xl/50"
          />
        </div>
 
@@ -72,7 +72,7 @@ const TopPicks = () => {
          <img
            src={RONALDO_Jersey}
            alt="Ronaldo Jersey"
-           className="w-full max-w-[350px] drop-shadow-xl/50"
+           className="w-full max-w-[600px] drop-shadow-xl/50"
          />
        </div>
 

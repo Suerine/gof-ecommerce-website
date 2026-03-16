@@ -11,7 +11,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="w-full my-3">
+    <footer className="w-full mt-3">
 
      {/* Desktop Navigation */}
      <div>

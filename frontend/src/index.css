@@ -628,7 +628,7 @@ html {
 
 /* FRONT */
 .flip-front {
-  color: gold;
+  color: white;
   border: 1px solid red;
   background-color: black;
   transform: rotateX(0deg) translateZ(25px);
@@ -680,4 +680,19 @@ html {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease;
 }

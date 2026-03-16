@@ -66,6 +66,30 @@ export const addToCart = async (req, res) => {
   }
 };
 
+export const updateCartItem = async (req, res) => {
+  try {
+    const { productId, size, quantity } = req.body;
+
+    const cart = await Cart.findOne({ user: req.user.id });
+
+    const item = cart.items.find(
+      (item) => item.product.toString() === productId && item.size === size,
+    );
+
+    if (!item) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    item.quantity = quantity;
+
+    await cart.save();
+
+    res.json(cart);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const getCart = async (req, res) => {
   try {
     const cart = await Cart.findOne({ user: req.user._id }).populate(

@@ -4,14 +4,26 @@ import App from "./App";
 import "./index.css";
 import { AuthProvider } from "./context/AuthContext"
 import { CartProvider } from "./context/CartContext";
-
+import { Toaster } from "react-hot-toast"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-   <AuthProvider>
-    <CartProvider>
-      <App />
-    </CartProvider>
-  </AuthProvider>
+    <AuthProvider>
+      <CartProvider>
+        <App />
+
+        <Toaster
+          position="top-right"
+          containerStyle={{ zIndex: 9999 }}
+          toastOptions={{
+            style: {
+              background: "#111",
+              color: "#fff"
+            }
+          }}
+        />
+
+      </CartProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
