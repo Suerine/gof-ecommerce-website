@@ -5,6 +5,7 @@ import {
   getProductById,
   updateProduct,
   deleteProduct,
+  searchProducts,
 } from "../controllers/productController.js";
 import cloudinary from "../config/cloudinary.js";
 
@@ -22,6 +23,9 @@ router.get("/cloud-test", async (req, res) => {
 GET ALL PRODUCTS (Public)
 */
 router.get("/", getProducts);
+
+/* SEARCH PRODUCTS (Public) */
+router.get("/search", searchProducts);
 
 /*
 GET SINGLE PRODUCT (Public)

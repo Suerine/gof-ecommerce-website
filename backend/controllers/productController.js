@@ -131,3 +131,22 @@ export const deleteProduct = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+/* SEARCH PRODUCTS */
+export const searchProducts = async (req, res) => {
+  try {
+    const search = req.query.search;
+
+    let query = { isActive: true };
+
+    if (search) {
+      query.name = { $regex: search, $options: "i" };
+    }
+
+    const products = await Product.find(query).limit(5);
+
+    res.json({ products });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

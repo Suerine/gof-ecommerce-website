@@ -95,74 +95,101 @@ const CartPage = () => {
       </div>
     )
   }
-
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10">
+  <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
 
-      <h1 className="text-2xl mb-8">Your Cart</h1>
+    <h1 className="text-2xl font-semibold mb-8">
+      Your Cart
+    </h1>
 
-      {cart.items.map((item) => (
+    {cart.items.map((item) => (
 
-        <div
-          key={item._id}
-          className="flex items-center gap-6 border-b pb-6 mb-6"
-        >
+      <div
+        key={item._id}
+        className="
+          flex flex-col sm:flex-row
+          gap-4 sm:gap-6
+          border-b pb-6 mb-6
+        "
+      >
 
-          <img
-            src={item.product.images?.[0]}
-            alt={item.product.name}
-            className="w-24 h-24 object-cover"
-          />
+        {/* Product Image */}
+        <img
+          src={item.product.images?.[0]}
+          alt={item.product.name}
+          className="
+            w-full sm:w-24
+            h-48 sm:h-24
+            object-cover
+            rounded
+          "
+        />
 
-          <div className="flex-1">
+        {/* Product Info */}
+        <div className="flex-1">
 
-            <h3>{item.product.name}</h3>
+          <h3 className="font-medium">
+            {item.product.name}
+          </h3>
 
-            <p>Size: {item.size}</p>
+          <p className="text-sm text-gray-500">
+            Size: {item.size}
+          </p>
 
-            {/* QUANTITY BUTTONS */}
-            <div className="flex items-center gap-2 mt-2">
+          {/* Quantity Controls */}
+          <div className="flex items-center gap-2 mt-3">
 
-              <button
-                onClick={() =>
-                  updateQuantity(
-                    item.product._id,
-                    item.size,
-                    item.quantity - 1
-                  )
-                }
-                disabled={item.quantity <= 1}
-                className="px-2 border"
-              >
-                -
-              </button>
+            <button
+              onClick={() =>
+                updateQuantity(
+                  item.product._id,
+                  item.size,
+                  item.quantity - 1
+                )
+              }
+              disabled={item.quantity <= 1}
+              className="px-2 py-1 border"
+            >
+              -
+            </button>
 
-              <span>{item.quantity}</span>
+            <span className="px-2">
+              {item.quantity}
+            </span>
 
-              <button
-                onClick={() =>
-                  updateQuantity(
-                    item.product._id,
-                    item.size,
-                    item.quantity + 1
-                  )
-                }
-                className="px-2 border"
-              >
-                +
-              </button>
-
-            </div>
+            <button
+              onClick={() =>
+                updateQuantity(
+                  item.product._id,
+                  item.size,
+                  item.quantity + 1
+                )
+              }
+              className="px-2 py-1 border"
+            >
+              +
+            </button>
 
           </div>
 
-          <p>KSh {item.price * item.quantity}</p>
+        </div>
 
-          {/* DUSTBIN REMOVE */}
+        {/* Price + Remove */}
+        <div className="
+          flex sm:flex-col
+          justify-between sm:items-end
+          items-center
+          gap-3
+        ">
+
+          <p className="font-semibold">
+            KSh {item.price * item.quantity}
+          </p>
+
           <button
             onClick={() =>
               removeItem(item.product._id, item.size)
-             }
+            }
             className="text-red-600"
           >
             <Trash2 size={20} />
@@ -170,20 +197,35 @@ const CartPage = () => {
 
         </div>
 
-      ))}
-
-      <div className="mt-10 flex justify-between">
-
-        <h2>Total: KSh {totalPrice}</h2>
-
-        <button className="bg-black text-white px-6 py-3">
-          Checkout
-        </button>
-
       </div>
 
+    ))}
+
+    {/* Total Section */}
+    <div className="
+      mt-10
+      flex flex-col sm:flex-row
+      gap-4
+      sm:justify-between
+      sm:items-center
+    ">
+
+      <h2 className="text-xl font-semibold">
+        Total: KSh {totalPrice}
+      </h2>
+
+      <button className="
+        bg-black text-white
+        px-6 py-3
+        w-full sm:w-auto
+      ">
+        Checkout
+      </button>
+
     </div>
-  )
+
+  </div>
+)
 }
 
 export default CartPage

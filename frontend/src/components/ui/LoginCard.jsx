@@ -68,7 +68,7 @@ function LoginCard({ isOpen, setIsOpen }) {
       {user ? (
         <div className="text-center">
 
-          <h2 className="text-xl font-semibold mb-4">
+          <h2 className="text-lg font-medium mb-4">
             Hi, {user.name}
           </h2>
 
@@ -84,7 +84,7 @@ function LoginCard({ isOpen, setIsOpen }) {
               logout()
               setIsOpen(false)
             }}
-            className="w-full bg-red-500 text-white py-2 rounded-full hover:bg-red-600"
+            className="w-full bg-red-600 text-white py-2 rounded-full hover:bg-red-700"
           >
             Logout
           </button>

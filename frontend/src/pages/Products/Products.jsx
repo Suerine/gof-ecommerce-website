@@ -2,12 +2,20 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import ProductCard from "./ProductCard"
 import { Link } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 
 function Products() {
 
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState("All")
   const [loading, setLoading] = useState(true)
+
+  const [searchParams] = useSearchParams()
+  const search = searchParams.get("search") 
+
+  const filteredProducts = products.filter((product) =>
+  product.name.toLowerCase().includes(search?.toLowerCase() || "")
+  )
 
   useEffect(() => {
 
@@ -98,7 +106,7 @@ function Products() {
           sm:gap-6
         ">
 
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
 
             <Link
               key={product._id}

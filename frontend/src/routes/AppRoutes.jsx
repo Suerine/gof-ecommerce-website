@@ -4,11 +4,12 @@ import Stats from "../pages/Stats/Stats";
 import Products from "../pages/Products/Products";
 import Checkout from "../pages/Shop/Checkout";
 import Orders from "../pages/Shop/Orders"
-import Profile from "../pages/Shop/Profile"
+import Profile from "../pages/Profile/Profile"
 import ProtectedRoute from "../pages/Auth/ProtectedRoutes"
 import Cart from "../pages/Shop/Cart";
 import ProductPage from "../pages/Products/ProductPage";
 import Wishlist from "../pages/Shop/Wishlist";
+import AuthPage from "../pages/Auth/AuthPage";
 
 const AppRoutes = () => {
   return (
@@ -17,7 +18,15 @@ const AppRoutes = () => {
       <Route path="/stats" element={<Stats />} />
       <Route path="/products" element={<Products />} />
       <Route path="/products/:id" element={<ProductPage />} />
-      <Route path="/cart" element={<Cart />} />
+      <Route path="/login" element={<AuthPage />} />
+      <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          }
+        />
       <Route
         path="/checkout"
         element={
