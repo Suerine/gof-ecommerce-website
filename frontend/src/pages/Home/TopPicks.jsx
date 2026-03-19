@@ -20,7 +20,7 @@ const TopPicks = () => {
      <div className="sm:hidden flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 pb-4 scroll-smooth">
 
        <div className="snap-center flex-shrink-0 w-[85%] transition-transform duration-500 border-6 border-white">
-         <a href="/stats">
+         <a href="/products/69bc2ea0fb672aa0ab70dd53">
            <img
              src={MESSI_Jersey}
              alt="Messi PSG"
@@ -30,19 +30,23 @@ const TopPicks = () => {
        </div>
 
        <div className="snap-center flex-shrink-0 w-[85%] transition-transform duration-500 border-6 border-white">
+        <a href="/products/69b6b77048d4212a6c57f2e0">
          <img
            src={RONALDINHO_Boots}
            alt="Ronaldinho Boots"
            className="w-full drop-shadow-xl/50"
          />
+        </a>
        </div>
 
        <div className="snap-center flex-shrink-0 w-[85%] transition-transform duration-500 border-6 border-white">
-         <img
-           src={RONALDO_Jersey}
-           alt="Ronaldo Jersey"
-           className="w-full drop-shadow-xl/50"
-         />
+        <a href="/products/69bc2aa7fb672aa0ab70dbcc">
+          <img
+            src={RONALDO_Jersey}
+            alt="Ronaldo Jersey"
+            className="w-full drop-shadow-xl/50"
+          />
+         </a>
        </div>
 
      </div>
@@ -51,7 +55,7 @@ const TopPicks = () => {
      <div className="hidden sm:grid grid-cols-2 lg:grid-cols-3 gap-8 items-center justify-items-center">
 
        <div className="transition-transform duration-500 hover:-translate-y-6 border-6 border-white">
-         <a href="/stats">
+         <a href="/products/69bc2ea0fb672aa0ab70dd53">
            <img
              src={MESSI_Jersey}
              alt="Messi PSG"
@@ -61,19 +65,23 @@ const TopPicks = () => {
        </div>
 
        <div className="transition-transform duration-500 hover:-translate-y-6 border-6 border-white">
+        <a href="/products/69b6b77048d4212a6c57f2e0">
          <img
            src={RONALDINHO_Boots}
            alt="Ronaldinho Boots"
            className="w-full max-w-[600px] drop-shadow-xl/50"
          />
+         </a> 
        </div>
 
        <div className="transition-transform duration-500 hover:-translate-y-6 border-6 border-white">
+        <a href="/products/69bc2aa7fb672aa0ab70dbcc">
          <img
            src={RONALDO_Jersey}
            alt="Ronaldo Jersey"
            className="w-full max-w-[600px] drop-shadow-xl/50"
          />
+        </a>
        </div>
 
      </div>

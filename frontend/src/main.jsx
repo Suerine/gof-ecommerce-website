@@ -5,10 +5,12 @@ import "./index.css";
 import { AuthProvider } from "./context/AuthContext"
 import { CartProvider } from "./context/CartContext";
 import { Toaster } from "react-hot-toast"
+import { WishlistProvider } from "./context/WishlistContext"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
+    <WishlistProvider>
       <CartProvider>
         <App />
 
@@ -24,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         />
 
       </CartProvider>
+    </WishlistProvider>
     </AuthProvider>
   </React.StrictMode>
 );
