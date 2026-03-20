@@ -1,5 +1,5 @@
 import React from 'react'
-import cosmosRing from '../../assets/images/cosmosRing.jpeg';
+import cosmosRing from '../../assets/images/cosmosRing.png';
 
 const Exclusive = () => {
   return (

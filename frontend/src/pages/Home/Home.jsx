@@ -3,6 +3,7 @@ import HeroSection from "../../components/ui/HeroSection";
 import TopPicks from "./TopPicks";
 import Exclusive from "./Exclusive";
 import FeaturedProducts from "./FeaturedProducts";
+import StatsSection from "./StatsSection";
 
 const Home = () => {
   useEffect(() => {
@@ -31,6 +32,7 @@ const Home = () => {
      <HeroSection />
      <TopPicks />
      <FeaturedProducts />
+     <StatsSection />
      <Exclusive />
     </>
   );
