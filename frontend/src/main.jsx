@@ -6,7 +6,7 @@ import { AuthProvider } from "./context/AuthContext"
 import { CartProvider } from "./context/CartContext";
 import { Toaster } from "react-hot-toast"
 import { WishlistProvider } from "./context/WishlistContext"
-import "@fontsource/poppins/index.css"
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
