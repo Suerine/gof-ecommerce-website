@@ -3,6 +3,9 @@ import { useParams, Link } from "react-router-dom"
 import API from "../../api/axios"
 import ProductCard from "./ProductCard"
 import { CartContext } from "../../context/CartContext"
+import { getWhatsAppLink } from "../../utils/helper";
+import { FaWhatsapp } from "react-icons/fa";
+
 
 const ProductPage = () => {
 
@@ -112,6 +115,21 @@ const ProductPage = () => {
           >
             Add to Cart
           </button>
+
+          <a
+           href={getWhatsAppLink(product)}
+           target="_blank"
+           rel="noopener noreferrer"
+           className="
+             w-full mt-4
+             bg-green-500 text-white py-3 rounded-full
+             flex items-center justify-center gap-2
+             hover:bg-green-600 transition
+           "
+         >
+           <FaWhatsapp className="text-lg"/>
+           Ask on WhatsApp
+         </a>
         </div>
       </div>
 

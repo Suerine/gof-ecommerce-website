@@ -1,6 +1,7 @@
 import { players } from "../../services/stats"
 import PlayerCard from "../../components/ui/PlayerCard"
 import PELE_IMG from "../../assets/images/pele-walking-cosmosNYC.png"
+import { Link } from "react-router-dom"
 
 function StatsSection() {
   return (
@@ -80,16 +81,16 @@ function StatsSection() {
          </div>
 
          {/* CTA */}
-         <button className="
+         <Link to="/stats" className="
            group flex items-center gap-2
-           text-white font-medium text-sm
+           text-white font-medium text-medium
            hover:text-yellow-500 transition
          ">
            View Full Stats
            <span className="transform transition group-hover:translate-x-1">
              →
            </span>
-         </button>
+         </Link>
 
        </div>
      </div>

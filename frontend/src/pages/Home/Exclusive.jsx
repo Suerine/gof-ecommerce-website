@@ -80,7 +80,7 @@ const Exclusive = () => {
             </span>
 
             <span className="flip-back">
-              <h3>$21,000</h3>
+              <h3>21,000 Ksh</h3>
             </span>
           </a>
         </div>

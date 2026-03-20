@@ -239,7 +239,7 @@ function Navbar() {
     </nav>
      <div className="w-full bg-primary border-t border-b border-gray-200 relative z-0">
       <CurvedLoop
-        marqueeText="🔥 Free Delivery Over 5,000Ksh ✦ New Drops ✦ Limited Stock ✦ Shop Now →"
+        marqueeText={`🛵 Free Delivery Over 5,000Ksh ✦ New Drops ✦ Limited Stock ✦ Shop Now →`}
         speed={1.2}
         curveAmount={0}
         className="fill-black"
