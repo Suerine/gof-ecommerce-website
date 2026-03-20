@@ -10,7 +10,7 @@ function StatsSection() {
        <div
          className="
            relative overflow-hidden
-           w-full h-[500px] sm:h-[600px] lg:h-[900px]
+           w-full h-[550px] sm:h-[600px] lg:h-[900px]
            bg-cover bg-center bg-no-repeat
          "
          style={{ backgroundImage: `url(${PELE_IMG})` }}
