@@ -3,31 +3,28 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { AuthProvider } from "./context/AuthContext"
-import { CartProvider } from "./context/CartContext";
-import { Toaster } from "react-hot-toast"
+import { CartProvider } from "./context/CartContext"
 import { WishlistProvider } from "./context/WishlistContext"
-
+import { Toaster } from "react-hot-toast"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-    <WishlistProvider>
       <CartProvider>
-        <App />
-
-        <Toaster
-          position="top-right"
-          containerStyle={{ zIndex: 9999 }}
-          toastOptions={{
-            style: {
-              background: "#111",
-              color: "#fff"
-            }
-          }}
-        />
-
+        <WishlistProvider>
+          <App />
+          <Toaster
+            position="top-right"
+            containerStyle={{ zIndex: 9999 }}
+            toastOptions={{
+              style: {
+                background: "#111",
+                color: "#fff"
+              }
+            }}
+          />
+        </WishlistProvider>
       </CartProvider>
-    </WishlistProvider>
     </AuthProvider>
   </React.StrictMode>
 );

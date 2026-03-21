@@ -1,11 +1,19 @@
 import { useState, useContext } from "react"
 import axios from "axios"
 import { AuthContext } from "../../context/AuthContext"
+import { CartContext } from "../../context/CartContext"
+import { WishlistContext } from "../../context/WishlistContext"
 import { useNavigate } from "react-router-dom"
 
 function AuthPage() {
 
   const { login, register } = useContext(AuthContext)
+  const { mergeGuestCart } = useContext(CartContext) 
+  const { mergeGuestWishlist } = useContext(WishlistContext)   
+
+  const mergeAll = async () => {
+  await Promise.all([mergeGuestCart(), mergeGuestWishlist()])
+  }
 
   const [isLogin, setIsLogin] = useState(true)
 
@@ -21,9 +29,9 @@ function AuthPage() {
   try {
 
     if (isLogin) {
-      await login(email, password)
+      await login(email, password, mergeAll)
     } else {
-      await register(name, email, password)
+      await register(name, email, password, mergeAll)
     }
 
     navigate("/")

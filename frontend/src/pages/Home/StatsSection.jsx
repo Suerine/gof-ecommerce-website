@@ -1,100 +1,120 @@
-import { players } from "../../services/stats"
-import PlayerCard from "../../components/ui/PlayerCard"
 import PELE_IMG from "../../assets/images/pele-walking-cosmosNYC.png"
 import { Link } from "react-router-dom"
 
 function StatsSection() {
   return (
-    <section className="bg-black">
-     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
-       {/* Image */}
-       <div
-         className="
-           relative overflow-hidden
-           w-full h-[550px] sm:h-[600px] lg:h-[900px]
-           bg-cover bg-center bg-no-repeat
-         "
-         style={{ backgroundImage: `url(${PELE_IMG})` }}
-       >
-         {/* Overlay */}
-         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-       </div>
-       {/* Content */}
-       <div className="max-w-xl space-y-10 py-8 px-4">
+    <section className="bg-black text-white overflow-hidden">
 
-         {/* Title */}
-         <div>
-           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-yellow-500">
-             Pelé
-           </h2>
-           <p className="text-sm text-gray-200 mt-2">The King of Football</p>
-         </div>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+        .stats-bebas { font-family: 'Bebas Neue', sans-serif; }
+        .stats-dm { font-family: 'DM Sans', sans-serif; }
+      `}</style>
 
-         {/* Description */}
-         <div className="text-gray-300 leading-relaxed text-sm md:text-base">
-           Pelé, born Edson Arantes do Nascimento, is widely regarded as the greatest
-           footballer of all time. <br /><br />
-           He won three FIFA World Cups with Brazil and scored over 1,000 career goals,
-           redefining excellence in the sport and inspiring generations worldwide.
-         </div>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-stretch">
 
-         {/* Career Info */}
-         <div className="grid grid-cols-2 gap-y-3 text-sm text-gray-300">
-           <p><span className="font-medium text-white">Full Name:</span><br /> Edson Arantes do Nascimento</p>
-           <p><span className="font-medium text-white">Nationality:</span><br /> Brazil</p>
-           <p><span className="font-medium text-white">Position:</span><br /> Forward</p>
-           <p><span className="font-medium text-white">Years Active:</span><br /> 1956 – 1977</p>
-           <p className="col-span-2">
-             <span className="font-medium text-white">Clubs:</span><br />
-             Santos FC, New York Cosmos
-           </p>
-         </div>
+        {/* Image */}
+        <div
+          className="relative overflow-hidden w-full h-[550px] sm:h-[600px] lg:h-[900px] bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${PELE_IMG})` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-         {/* Divider */}
-         <div className="w-full h-px bg-gray-300"></div>
+          {/* Watermark number */}
+          <div className="absolute bottom-6 right-6 stats-bebas text-[10rem] leading-none select-none pointer-events-none text-yellow-400 opacity-10">
+            10
+          </div>
 
-         {/* Stats */}
-         <div className="flex justify-between text-center">
-           <div>
-             <p className="text-3xl font-bold text-yellow-500">1281</p>
-             <p className="text-xs text-gray-300 mt-1">Goals</p>
-           </div>
+          {/* Bottom label */}
+          <div className="absolute bottom-8 left-8">
+            <p className="stats-bebas text-5xl text-white leading-none">Pelé</p>
+            <p className="stats-dm text-white/40 text-xs tracking-[0.25em] uppercase mt-1">Brazil · Forward</p>
+          </div>
+        </div>
 
-           <div>
-             <p className="text-3xl font-bold text-yellow-500">3</p>
-             <p className="text-xs text-gray-300 mt-1">World Cups</p>
-           </div>
+        {/* Content */}
+        <div className="flex flex-col justify-center space-y-8 py-12 px-8 sm:px-12 border-l border-white/10">
 
-           <div>
-             <p className="text-3xl font-bold text-yellow-500">26</p>
-             <p className="text-xs text-gray-300 mt-1">Trophies</p>
-           </div>
-         </div>
+          {/* Label */}
+          <p className="stats-dm text-yellow-400 text-xs tracking-[0.3em] uppercase">
+            Hall of Legends
+          </p>
 
-         {/* Divider */}
-         <div className="w-full h-px bg-gray-300"></div>
+          {/* Name */}
+          <div>
+            <h2 className="stats-bebas text-7xl sm:text-8xl leading-none tracking-wide text-white">
+              Pelé
+            </h2>
+            <p className="stats-dm text-white/40 text-sm italic mt-1">The King of Football</p>
+          </div>
 
-         {/* Quote */}
-         <div className="border-l-4 border-gray-300 pl-4 italic text-gray-300 text-sm">
-           “Success is no accident. It is hard work, perseverance, learning,
-           sacrifice, and most of all, love of what you are doing.”
-         </div>
+          {/* Bio */}
+          <p className="stats-dm text-white/60 text-sm sm:text-base leading-relaxed max-w-md">
+            Pelé, born Edson Arantes do Nascimento, is widely regarded as the greatest
+            footballer of all time. He won three FIFA World Cups with Brazil and scored
+            over 1,000 career goals, redefining excellence in the sport and inspiring
+            generations worldwide.
+          </p>
 
-         {/* CTA */}
-         <Link to="/stats" className="
-           group flex items-center gap-2
-           text-white font-medium text-medium
-           hover:text-yellow-500 transition
-         ">
-           View Full Stats
-           <span className="transform transition group-hover:translate-x-1">
-             →
-           </span>
-         </Link>
+          {/* Career info */}
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { label: "Full Name", value: "Edson Arantes do Nascimento" },
+              { label: "Nationality", value: "Brazil" },
+              { label: "Position", value: "Forward" },
+              { label: "Years Active", value: "1956 – 1977" },
+            ].map(({ label, value }) => (
+              <div key={label}>
+                <p className="stats-dm text-white/30 text-xs uppercase tracking-widest mb-1">{label}</p>
+                <p className="stats-dm text-white text-sm font-medium">{value}</p>
+              </div>
+            ))}
+            <div className="col-span-2">
+              <p className="stats-dm text-white/30 text-xs uppercase tracking-widest mb-1">Clubs</p>
+              <p className="stats-dm text-white text-sm font-medium">Santos FC, New York Cosmos</p>
+            </div>
+          </div>
 
-       </div>
-     </div>
-   </section>
+          {/* Divider */}
+          <div className="h-px bg-white/10" />
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-4">
+            {[
+              { label: "Goals", value: "1281" },
+              { label: "World Cups", value: "3" },
+              { label: "Trophies", value: "26" },
+            ].map(({ label, value }) => (
+              <div key={label}>
+                <p className="stats-bebas text-4xl sm:text-5xl leading-none text-yellow-400">{value}</p>
+                <p className="stats-dm text-white/40 text-xs uppercase tracking-widest mt-2">{label}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-white/10" />
+
+          {/* Quote */}
+          <div className="border-l-2 border-yellow-400 pl-5 py-1">
+            <p className="stats-dm italic text-white/50 text-sm leading-relaxed">
+              "Success is no accident. It is hard work, perseverance, learning,
+              sacrifice, and most of all, love of what you are doing."
+            </p>
+          </div>
+
+          {/* CTA */}
+          <Link
+            to="/stats"
+            className="group inline-flex items-center gap-2 stats-dm text-sm font-medium text-white hover:text-yellow-400 transition-colors w-fit"
+          >
+            <span className="tracking-widest uppercase text-xs">View Full Stats</span>
+            <span className="transform transition-transform group-hover:translate-x-1 text-yellow-400">→</span>
+          </Link>
+
+        </div>
+      </div>
+    </section>
   )
 }
 

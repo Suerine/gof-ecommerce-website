@@ -1,10 +1,20 @@
 import { createContext, useState, useEffect, useContext } from "react"
-import API from "../api/axios" 
+import API from "../api/axios"
 import { AuthContext } from "./AuthContext"
 import toast from "react-hot-toast"
 import CartToast from "../components/ui/CartToast"
 
 export const CartContext = createContext()
+
+const GUEST_CART_KEY = "guest_cart"
+
+const getGuestCart = () => JSON.parse(localStorage.getItem(GUEST_CART_KEY) || "[]")
+const saveGuestCart = (items) => localStorage.setItem(GUEST_CART_KEY, JSON.stringify(items))
+const clearGuestCart = () => localStorage.removeItem(GUEST_CART_KEY)
+
+// Safely extract product ID regardless of whether it's populated or a raw string
+const getProductId = (product) =>
+  product && typeof product === "object" ? product._id : product
 
 export const CartProvider = ({ children }) => {
   const { user } = useContext(AuthContext)
@@ -12,81 +22,153 @@ export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0)
 
   const fetchCart = async () => {
-    if (!user) {
-      setCart(null)
-      setCartCount(0)
-      return
-    }
-
-    try {
-      const res = await API.get("/api/cart") 
-
-      const items = res.data?.items || []
-      setCart(res.data)
-
-      const totalItems = items.reduce(
-        (total, item) => total + item.quantity,
-        0
-      )
-      setCartCount(totalItems)
-
-    } catch (err) {
-      console.error(err)
+    if (user) {
+      try {
+        const res = await API.get("/api/cart")
+        setCart(res.data)
+        const items = res.data?.items || []
+        setCartCount(items.reduce((total, item) => total + item.quantity, 0))
+      } catch (err) {
+        console.error(err)
+      }
+    } else {
+      const guestItems = getGuestCart()
+      setCart({ items: guestItems })
+      setCartCount(guestItems.reduce((sum, item) => sum + item.quantity, 0))
     }
   }
 
-  const addToCart = async (product) => {
-    if (!user) {
-      toast.error("Please login first")
-      return
-    }
+  const addToCart = async (product, selectedSize) => {
+   const size = selectedSize || product.sizes?.[0]?.size  
+
+   if (!user) {
+     const guestCart = getGuestCart()
+     const existing = guestCart.find(
+       (item) => item.productId === product._id && item.size === size
+     )
+     if (existing) {
+       existing.quantity += 1
+     } else {
+       guestCart.push({
+         productId: product._id,
+         size,
+         quantity: 1,
+         name: product.name,
+         price: product.price,
+         image: product.images?.[0],
+       })
+     }
+     saveGuestCart(guestCart)
+     fetchCart()
+     toast.custom(() => (
+       <div className="bg-black text-white px-4 py-3 rounded-lg shadow-xl border border-gray-700 flex items-center animate-slide-in">
+         <CartToast product={product} />
+       </div>
+     ))
+     return
+   }
+
+   try {
+     await API.post("/api/cart", {
+       productId: product._id,
+       size,                        // ← use the passed size
+       quantity: 1,
+     })
+     await fetchCart()
+     toast.custom(() => (
+       <div className="bg-black text-white px-4 py-3 rounded-lg shadow-xl border border-gray-700 flex items-center animate-slide-in">
+         <CartToast product={product} />
+       </div>
+     ))
+   } catch (err) {
+     console.error(err)
+     toast.error("Failed to add product")
+   }
+ }
+
+  const mergeGuestCart = async () => {
+    const guestItems = getGuestCart()
+    if (!guestItems.length) return
 
     try {
-      await API.post("/api/cart", { // ✅ No need for auth header
-        productId: product._id,
-        size: product.sizes?.[0]?.size,
-        quantity: 1
-      })
-
+      await API.post("/api/cart/merge", { items: guestItems })
+      clearGuestCart()
       await fetchCart()
-
-      toast.custom((t) => (
-        <div className="bg-black text-white px-4 py-3 rounded-lg shadow-xl border border-gray-700 flex items-center animate-slide-in">
-          <CartToast product={product} />
-        </div>
-      ))
     } catch (err) {
-      console.error(err)
-      toast.error("Failed to add product")
+      console.error("Failed to merge guest cart", err)
     }
   }
 
   const removeItem = async (productId, size) => {
-    try {
-      await API.delete("/api/cart", { // ✅ No need for auth header
-        data: { productId, size }
-      })
+    if (!user) {
+      const updated = getGuestCart().filter(
+        (item) => !(item.productId === productId && item.size === size)
+      )
+      saveGuestCart(updated)
+      fetchCart()
+      return
+    }
 
+    try {
+      await API.delete("/api/cart", { data: { productId, size } })
       setCart((prevCart) => ({
         ...prevCart,
         items: prevCart.items.filter(
-          (item) => !(item.product._id === productId && item.size === size)
-        )
+          (item) => !(getProductId(item.product) === productId && item.size === size)
+        ),
       }))
-
       fetchCart()
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
+  const updateQuantity = async (productId, size, quantity) => {
+    if (quantity < 1) return
+
+    if (!user) {
+      const updated = getGuestCart().map((item) =>
+        item.productId === productId && item.size === size
+          ? { ...item, quantity }
+          : item
+      )
+      saveGuestCart(updated)
+      setCart({ items: updated })
+      setCartCount(updated.reduce((sum, item) => sum + item.quantity, 0))
+      return
+    }
+
+    try {
+      await API.put("/api/cart", { productId, size, quantity })
+      setCart((prevCart) => ({
+        ...prevCart,
+        items: prevCart.items.map((item) =>
+          getProductId(item.product) === productId && item.size === size
+            ? { ...item, quantity }
+            : item
+        ),
+      }))
+      fetchCart()
     } catch (err) {
       console.error(err)
     }
   }
 
   useEffect(() => {
-    fetchCart()
+    if (user) {
+      const guestItems = getGuestCart()
+      if (!guestItems.length) {
+        fetchCart()
+      }
+    } else {
+      const guestItems = getGuestCart()
+      setCartCount(guestItems.reduce((sum, item) => sum + item.quantity, 0))
+      setCart({ items: guestItems })
+    }
   }, [user])
 
   return (
-    <CartContext.Provider value={{ cart, cartCount, fetchCart, addToCart, removeItem }}> {/* ✅ Added removeItem to context */}
+    <CartContext.Provider value={{ cart, cartCount, fetchCart, addToCart, removeItem, updateQuantity, mergeGuestCart }}>
       {children}
     </CartContext.Provider>
   )

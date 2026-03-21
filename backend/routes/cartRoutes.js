@@ -5,35 +5,18 @@ import {
   removeFromCart,
   clearCart,
   updateCartItem,
+  mergeCart,
 } from "../controllers/cartController.js";
 
 import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-/*
-GET USER CART
-*/
+router.post("/merge", protect, mergeCart);
 router.get("/", protect, getCart);
-
-/*
-ADD ITEM TO CART
-*/
 router.post("/", protect, addToCart);
-
-/*
-UPDATE CART ITEM QUANTITY
-*/
 router.put("/", protect, updateCartItem);
-
-/*
-REMOVE ITEM FROM CART
-*/
-router.delete("/", protect, removeFromCart);
-
-/*
-CLEAR CART
-*/
 router.delete("/clear", protect, clearCart);
+router.delete("/", protect, removeFromCart);
 
 export default router;

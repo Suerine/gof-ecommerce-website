@@ -144,3 +144,50 @@ export const clearCart = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const mergeCart = async (req, res) => {
+  try {
+    const { items } = req.body; // [{ productId, size, quantity }]
+
+    if (!items || !items.length) {
+      return res.status(400).json({ message: "No items to merge" });
+    }
+
+    let cart = await Cart.findOne({ user: req.user._id });
+
+    if (!cart) {
+      cart = await Cart.create({ user: req.user._id, items: [] });
+    }
+
+    for (const guestItem of items) {
+      const { productId, size, quantity } = guestItem;
+
+      const product = await Product.findById(productId);
+      if (!product || !product.isActive) continue;
+
+      const selectedSize = product.sizes.find((s) => s.size === size);
+      if (!selectedSize) continue;
+
+      const existingItem = cart.items.find(
+        (item) => item.product.toString() === productId && item.size === size,
+      );
+
+      if (existingItem) {
+        const newQty = existingItem.quantity + quantity;
+        existingItem.quantity = Math.min(newQty, selectedSize.stock);
+      } else {
+        cart.items.push({
+          product: productId,
+          size,
+          quantity: Math.min(quantity, selectedSize.stock),
+          price: product.price,
+        });
+      }
+    }
+
+    await cart.save();
+    res.status(200).json(cart);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

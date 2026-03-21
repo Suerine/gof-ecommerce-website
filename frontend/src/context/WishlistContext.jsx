@@ -4,13 +4,16 @@ import { AuthContext } from "./AuthContext"
 
 export const WishlistContext = createContext()
 
+const GUEST_WISHLIST_KEY = "guest_wishlist"
+const getGuestWishlist = () => JSON.parse(localStorage.getItem(GUEST_WISHLIST_KEY) || "[]")
+const saveGuestWishlist = (items) => localStorage.setItem(GUEST_WISHLIST_KEY, JSON.stringify(items))
+const clearGuestWishlist = () => localStorage.removeItem(GUEST_WISHLIST_KEY)
+
 export const WishlistProvider = ({ children }) => {
   const { user } = useContext(AuthContext)
-
   const [wishlist, setWishlist] = useState([])
   const [loading, setLoading] = useState(false)
 
-  // ✅ FETCH WISHLIST
   const fetchWishlist = async () => {
     try {
       setLoading(true)
@@ -23,60 +26,85 @@ export const WishlistProvider = ({ children }) => {
     }
   }
 
-  // ✅ ADD
   const addToWishlist = async (product) => {
-    try {
-      // 🔥 optimistic UI
-      setWishlist((prev) => {
-        const exists = prev.find(p => p._id === product._id)
-        if (exists) return prev
-        return [...prev, product]
-      })
-
-      await API.post("/api/wishlist", {
-        productId: product._id,
-      })
-
-    } catch (err) {
-      console.error(err)
-      fetchWishlist() // fallback if error
+    // Guest flow
+    if (!user) {
+      const guest = getGuestWishlist()
+      const exists = guest.find((p) => p._id === product._id)
+      if (!exists) {
+        const updated = [...guest, product]
+        saveGuestWishlist(updated)
+        setWishlist(updated)
+      }
+      return
     }
-  }
 
-  // ✅ REMOVE
-  const removeFromWishlist = async (productId) => {
+    // Logged-in flow — optimistic
+    setWishlist((prev) => {
+      const exists = prev.find((p) => p._id === product._id)
+      if (exists) return prev
+      return [...prev, product]
+    })
+
     try {
-      // 🔥 optimistic UI
-      setWishlist((prev) =>
-        prev.filter(p => p._id !== productId)
-      )
-
-      await API.delete(`/api/wishlist/${productId}`)
-
+      await API.post("/api/wishlist", { productId: product._id })
     } catch (err) {
       console.error(err)
       fetchWishlist()
     }
   }
 
-  // ✅ LOAD WHEN USER LOGS IN
+  const removeFromWishlist = async (productId) => {
+    // Guest flow
+    if (!user) {
+      const updated = getGuestWishlist().filter((p) => p._id !== productId)
+      saveGuestWishlist(updated)
+      setWishlist(updated)
+      return
+    }
+
+    // Logged-in flow — optimistic
+    setWishlist((prev) => prev.filter((p) => p._id !== productId))
+
+    try {
+      await API.delete(`/api/wishlist/${productId}`)
+    } catch (err) {
+      console.error(err)
+      fetchWishlist()
+    }
+  }
+
+  // Called by AuthContext after login
+  const mergeGuestWishlist = async () => {
+    const guestItems = getGuestWishlist()
+    if (!guestItems.length) return
+
+    try {
+      const productIds = guestItems.map((p) => p._id)
+      await API.post("/api/wishlist/merge", { productIds })
+      clearGuestWishlist()
+      await fetchWishlist()
+    } catch (err) {
+      console.error("Failed to merge guest wishlist", err)
+    }
+  }
+
   useEffect(() => {
     if (user) {
-      fetchWishlist()
+      const guestItems = getGuestWishlist()
+      if (!guestItems.length) {
+        // No guest items — safe to just fetch DB wishlist
+        fetchWishlist()
+      }
+      // If there ARE guest items, mergeGuestWishlist() will
+      // handle fetching after merge — don't fetch here
     } else {
-      setWishlist([])
+      setWishlist(getGuestWishlist())
     }
   }, [user])
 
   return (
-    <WishlistContext.Provider
-      value={{
-        wishlist,
-        loading,
-        addToWishlist,
-        removeFromWishlist,
-      }}
-    >
+    <WishlistContext.Provider value={{ wishlist, loading, addToWishlist, removeFromWishlist, mergeGuestWishlist }}>
       {children}
     </WishlistContext.Provider>
   )

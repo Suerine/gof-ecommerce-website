@@ -79,3 +79,31 @@ export const removeFromWishlist = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const mergeWishlist = async (req, res) => {
+  try {
+    const { productIds } = req.body; // [productId, productId, ...]
+
+    if (!productIds || !productIds.length) {
+      return res.status(400).json({ message: "No items to merge" });
+    }
+
+    let wishlist = await Wishlist.findOne({ user: req.user.id });
+
+    if (!wishlist) {
+      wishlist = await Wishlist.create({ user: req.user.id, products: [] });
+    }
+
+    for (const productId of productIds) {
+      if (!wishlist.products.includes(productId)) {
+        wishlist.products.push(productId);
+      }
+    }
+
+    await wishlist.save();
+    const updated = await wishlist.populate("products");
+    res.status(200).json(updated);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

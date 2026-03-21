@@ -19,13 +19,7 @@ const AppRoutes = () => {
       <Route path="/products" element={<Products />} />
       <Route path="/products/:id" element={<ProductPage />} />
       <Route path="/login" element={<AuthPage />} />
-      <Route
-          path="/cart"
-          element={
-            <ProtectedRoute>
-              <Cart />
-            </ProtectedRoute>
-          }
+      <Route path="/cart" element={ <Cart />}
         />
       <Route
         path="/checkout"
@@ -57,9 +51,7 @@ const AppRoutes = () => {
       <Route
         path="/wishlist"
         element={
-          <ProtectedRoute>
             <Wishlist />
-          </ProtectedRoute>
         }
       />
 
