@@ -14,7 +14,7 @@ import fog6 from "../../assets/images/fog_6.png";
 import fog7 from "../../assets/images/fog_7.png";
 import blackShadow from "../../assets/images/black_shadow.png";
 import sunRays from "../../assets/images/sun_rays.png";
-import GOF_Logo from "../../assets/images/GOFlogo.png";
+import GOF_Logo from "../../assets/images/GOFlogowhite.png";
 
 function HeroSection() {
   const [xValue, setXValue] = useState(0);

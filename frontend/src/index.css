@@ -1,7 +1,41 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+/* Navbar */
+.nav-bebas { font-family: 'Bebas Neue', sans-serif; }
+.nav-dm { font-family: 'DM Sans', sans-serif; }
 
+.nav-link-item {
+  position: relative;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.2s ease;
+}
+
+.nav-link-item::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #facc15;
+  transition: width 0.3s ease;
+}
+
+.nav-link-item:hover { color: white; }
+.nav-link-item:hover::after { width: 100%; }
+
+.mobile-menu-enter { animation: slideDown 0.25s ease forwards; }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 @theme {
   --font-display: 'Poppins', sans-serif;

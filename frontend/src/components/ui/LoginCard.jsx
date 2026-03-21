@@ -82,7 +82,7 @@ function LoginCard({ isOpen, setIsOpen }) {
               <Link
                 to="/profile"
                 onClick={() => setIsOpen(false)}
-                className="w-full text-center py-2 text-sm font-medium border border-black rounded-full hover:bg-black hover:text-yellow-400 transition-all duration-200"
+                className="w-full text-center py-2 text-sm font-medium border text-black border-black rounded-full hover:bg-black hover:text-yellow-400 transition-all duration-200"
               >
                 View Profile
               </Link>
@@ -118,7 +118,7 @@ function LoginCard({ isOpen, setIsOpen }) {
                     placeholder="Full Name"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2.5 text-sm border border-gray-200 rounded-lg outline-none focus:border-black transition-colors"
+                    className="w-full pl-9 pr-3 py-2.5 text-sm border border-gray-200 rounded-lg outline-none focus:border-black transition-colors text-gray-500"
                   />
                 </div>
               )}
@@ -130,7 +130,7 @@ function LoginCard({ isOpen, setIsOpen }) {
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2.5 text-sm border border-gray-200 rounded-lg outline-none focus:border-black transition-colors"
+                  className="w-full pl-9 pr-3 py-2.5 text-sm border border-gray-200 rounded-lg outline-none focus:border-black transition-colors text-gray-500"
                 />
               </div>
 
@@ -142,7 +142,7 @@ function LoginCard({ isOpen, setIsOpen }) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-                  className="w-full pl-9 pr-3 py-2.5 text-sm border border-gray-200 rounded-lg outline-none focus:border-black transition-colors"
+                  className="w-full pl-9 pr-3 py-2.5 text-sm border border-gray-200 rounded-lg outline-none focus:border-black transition-colors text-gray-500"
                 />
               </div>
 

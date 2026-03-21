@@ -8,6 +8,7 @@ import cartRoutes from "./routes/cartRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import "./config/cloudinary.js";
 import wishlistRoutes from "./routes/wishlistRoutes.js";
+import mpesaRoutes from "./routes/MpeseRoutes.js";
 
 process.on("unhandledRejection", (err) => {
   console.error("Unhandled Rejection:", err);
@@ -53,6 +54,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/wishlist", wishlistRoutes);
+app.use("/api/payments/mpesa", mpesaRoutes);
 
 app.get("/", (req, res) => {
   res.send("GOF Store API is running...");

@@ -1,7 +1,7 @@
 import React from "react";
-import RONALDO_Jersey from '../../assets/images/ronaldojersey.jpeg';
-import RONALDINHO_Boots from '../../assets/images/Ronaldinhoboots.jpeg';
-import MESSI_Jersey from '../../assets/images/messi-number-30.jpg';
+import RONALDO_Jersey from '../../assets/images/backhomeronaldo.png';
+import RONALDINHO_Boots from '../../assets/images/goldenboots.png';
+import MESSI_Jersey from '../../assets/images/messiinpsg.png';
 import { Link } from "react-router-dom";
 
 const picks = [
@@ -64,7 +64,7 @@ const TopPicks = () => {
             className="pick-card snap-center flex-shrink-0 w-[80%] relative overflow-hidden rounded-2xl bg-white shadow-md"
           >
             <div className="aspect-[3/4] overflow-hidden"> 
-            <img src={pick.img} alt={pick.alt} className="pick-img w-full object-cover" />
+            <img src={pick.img} alt={pick.alt} className="pick-img w-full h-full object-cover" />
             </div>
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
               <span className="tp-dm text-yellow-400 text-xs tracking-widest uppercase">{pick.tag}</span>
@@ -80,8 +80,7 @@ const TopPicks = () => {
           <a
             key={pick.href}
             href={pick.href}
-            className={`pick-card relative overflow-hidden rounded-2xl bg-white shadow-md block
-              ${i === 1 ? "mt-8" : ""}`}
+            className={`pick-card relative overflow-hidden rounded-2xl bg-white shadow-md block`}
           >
            <div className="aspect-[3/4] overflow-hidden">  {/* ← add this wrapper */}
             <img src={pick.img} alt={pick.alt} className="pick-img w-full h-full object-cover" />

@@ -185,15 +185,24 @@ const CartPage = () => {
               </p>
             )}
 
-            <button
-              disabled={!user}
-              className="w-full py-3 bg-black text-white cart-dm text-sm font-medium rounded-full
-                hover:text-yellow-400 transition-colors
-                disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              Checkout
-            </button>
-
+            {user ? (
+              <Link
+                to="/checkout"
+                className="w-full py-3 bg-black text-white cart-dm text-sm font-medium rounded-full
+                  hover:text-yellow-400 transition-colors text-center block"
+              >
+                Checkout
+              </Link>
+            ) : (
+              <button
+                disabled
+                className="w-full py-3 bg-black text-white cart-dm text-sm font-medium rounded-full
+                  opacity-40 cursor-not-allowed"
+              >
+                Checkout
+              </button>
+            )}
+            
             <Link
               to="/products"
               className="block text-center mt-3 cart-dm text-xs text-gray-400 hover:text-black transition-colors"
