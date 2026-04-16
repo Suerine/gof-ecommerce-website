@@ -111,7 +111,7 @@ const TopPicks = () => {
       </div>
 
       {/* CTA */}
-      {/* <div className="flex justify-center mt-10">
+      <div className="flex justify-center mt-10">
         <a
           href="/products"
           className="tp-dm px-10 py-3.5 bg-black border border-yellow-500 text-white text-sm
@@ -121,7 +121,7 @@ const TopPicks = () => {
         >
           Go To Collections
         </a>
-      </div> */}
+      </div>
 
     </section>
   );
