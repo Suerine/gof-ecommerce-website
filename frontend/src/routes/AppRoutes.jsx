@@ -10,6 +10,7 @@ import Cart from "../pages/Shop/Cart";
 import ProductPage from "../pages/Products/ProductPage";
 import Wishlist from "../pages/Shop/Wishlist";
 import AuthPage from "../pages/Auth/AuthPage";
+import AdminDashboard from "../pages/Admin/AdminDashboard";
 
 const AppRoutes = () => {
   return (
@@ -52,6 +53,15 @@ const AppRoutes = () => {
         path="/wishlist"
         element={
             <Wishlist />
+        }
+      />
+
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            <AdminDashboard />
+          </ProtectedRoute>
         }
       />
 
