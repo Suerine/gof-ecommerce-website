@@ -10,21 +10,21 @@ const picks = [
     alt: "Messi PSG",
     label: "Messi · PSG",
     tag: "Jersey",
-    href: "/products/69bc2ea0fb672aa0ab70dd53",
+    href: "/products/69e25ab8704779df1f25b667",
   },
   {
     img: RONALDINHO_Boots,
     alt: "Ronaldinho Boots",
     label: "Ronaldinho",
     tag: "Boots",
-    href: "/products/69b6b77048d4212a6c57f2e0",
+    href: "/products/69e286acbaeebaa1b809b881",
   },
   {
     img: RONALDO_Jersey,
     alt: "Ronaldo Jersey",
     label: "Ronaldo · CR7",
     tag: "Jersey",
-    href: "/products/69bc2aa7fb672aa0ab70dbcc",
+    href: "/products/69e286d1baeebaa1b809b896",
   },
 ]
 
